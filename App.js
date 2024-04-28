@@ -1,11 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Login from './Login';
+import { useState } from 'react';
 
 export default function App() {
+  const [isSigned, setSigned] = useState(true)
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>{isSigned ? "LOGIN:" : "SIGN UP:"}</Text>
       <StatusBar style="auto" />
+
+      <Login/>
     </View>
   );
 }
