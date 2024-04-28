@@ -6,13 +6,20 @@ import SignUp from './components/SignUp';
 
 export default function App() {
   const [isSigned, setSigned] = useState(true)
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{isSigned ? "Sign In:" : "Sign Up:"}</Text>
-      <StatusBar style="auto" />
+  const [data, setData] = useState([
+    {
+      username:"admin",
+      password:"admin"
+    }
+  ])
 
-      {isSigned ? (<SignIn setSigned={setSigned}/>) : (<SignUp setSigned={setSigned}/>)}
-    </View>
+  return (
+      <View style={styles.container}>
+        <Text style={styles.text}>{isSigned ? "Sign In:" : "Sign Up:"}</Text>
+        <StatusBar style="auto" />
+
+        {isSigned ? (<SignIn setSigned={setSigned} data={data}/>) : (<SignUp setSigned={setSigned} data={data} setData={setData}/>)}
+      </View>
   );
 }
 

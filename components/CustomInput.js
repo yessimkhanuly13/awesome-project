@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
 import { TextInput, StyleSheet, View, Text } from "react-native";
 
-export default function CustomInput({control, placeholder, name, secureTextEntry, rules }) {
+export default function CustomInput({control, placeholder, name, secureTextEntry = false, rules }) {
   
   return (
     <View style={styles.container}>
