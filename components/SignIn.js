@@ -1,8 +1,9 @@
-import { View, Text, Button, Alert, TouchableOpacity } from "react-native"
+import { View, Text, Alert, TouchableOpacity } from "react-native"
 import { useForm } from "react-hook-form"
 import CustomInput from "./CustomInput"
+import CustomButton from "./CustomButton"
 
-function SignIn() {
+function SignIn({setSigned}) {
 
     const {handleSubmit, control, formState: {errors}, reset} = useForm({defaultValues: {
         username: "",
@@ -16,8 +17,8 @@ function SignIn() {
 
   return (
     <View style={{marginTop: 10, width:"100%",display:"flex", flexDirection:"col", alignItems:"center", justifyContent: "center"}}>
-        <CustomInput control={control} name="username" placeholder="username" secureTextEntry={false}/>
-        <CustomInput control={control} name="password" placeholder="password" secureTextEntry={true}/>
+        <CustomInput control={control} name="username" placeholder="username" secureTextEntry={false} rules={{required: "Username is required"}}/>
+        <CustomInput control={control} name="password" placeholder="password" secureTextEntry={true} rules={{required: "Password is required", minLength: {value: 3, message: "Minimum length of password should be 5 characters", }}}/>
             <View style={{
                 display: "flex",
                 justifyContent: "space-around",
@@ -26,17 +27,12 @@ function SignIn() {
             }}>
                 <Text>Don't have an account? </Text>
                 <TouchableOpacity
-                 onPress={()=>Alert.alert('Sign Up')}>
+                 onPress={()=>setSigned(false)}>
                     <Text style={{color:"blue"}}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
             
-            <Button
-                title="Enter"
-                style={{width:"50%", backgroundColor: "green", color: "white"}}
-                color={"green"}
-                onPress={handleSubmit(handleLogin)}
-            />
+            <CustomButton title="Sign In" onPress={handleSubmit(handleLogin)}/>
     </View>
   )
 }

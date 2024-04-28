@@ -1,15 +1,13 @@
 import { Controller } from "react-hook-form";
 import { TextInput, StyleSheet, View, Text } from "react-native";
 
-export default function CustomInput({control, placeholder, name, secureTextEntry }) {
+export default function CustomInput({control, placeholder, name, secureTextEntry, rules }) {
   
   return (
     <View style={styles.container}>
      <Controller
             control={control}
-            rules={{
-                required: true
-            }}
+            rules={rules}
             render={({field: {onChange, onBlur, value}, fieldState:{error}})=>(
               <View style={{width: "50%"}}>
                 <View 
@@ -24,7 +22,7 @@ export default function CustomInput({control, placeholder, name, secureTextEntry
                       secureTextEntry={secureTextEntry}
                     />
               </View>
-              {error && <Text style={{color: "red", alignSelf: "flex-start", padding: 3}}>Error</Text>}
+              {error && <Text style={{color: "red", alignSelf: "flex-start", padding: 3}}>{error.message || "Error"}</Text>}
               </View>
             )}
             name={name}
